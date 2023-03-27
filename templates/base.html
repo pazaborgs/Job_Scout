@@ -1,0 +1,60 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet"
+  href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <title>Job Scout</title>
+    
+    <title>Job Scout</title>
+</head>
+
+
+<<body>
+    <nav class="nav-bar">
+        <div class="nav-logo">
+            <img src="" alt="Logo">
+        </div>
+        <div class="nav-links">
+            <ul class="nav-itens">
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-login" href="#">Login</button>
+            <button class="nav-signin" href="#">Sign In</button>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
+    </nav>
+
+    {% block 'body' %}
+    {% endblock%}
+    
+    <footer class="ft-box">
+        <div class="ft-socials">
+            <ul class="ft-icons">
+                <li><a href="#"><i class="ri-github-fill"></i></a></li>
+                <li><a href="#"><i class="ri-linkedin-fill"></i></a></li>
+                <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+                <li><a href="#"><i class="ri-mail-line"></i></a></li>
+            </ul>
+        </div>
+        <div class="pi-info">
+            <p> Projeto Integrador em Computação  I — Eixo Computação 2021 </p>
+        </div>
+        <div class="creators">
+            <p>Patrick Regis | Renato Aguetoni</p>
+        </div>
+    </footer> 
+</body>
+</html>
