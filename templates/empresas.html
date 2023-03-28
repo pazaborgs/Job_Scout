@@ -5,15 +5,16 @@
     <div class="wrapper">
         <div class="box">
             <div class="header">
-                <h3 class="titulo">Nova empresa</h3>
+                <h3 class="title">Nova empresa</h3>
             </div>
 
             <div class="body-box">
                 <form action="" method="" enctype="multipart/form-data">
+
                     <div class="row">
                         <div class="col-md">
                             <label>Nome:</label>
-                            <input type="text" class="form-control" name="nome" placeholder="Digite seu nome...">
+                            <input type="text" class="form-control" name="name" placeholder="Digite seu nome...">
                         </div>
 
                         <div class="col-md">
@@ -21,25 +22,25 @@
                             <input type="email" class="form-control" name="email" placeholder="email@gmail.com">
                         </div>
 
+                        <div class="col-md">
+                            <label>Sede:</label>
+                            <input type="text" class="form-control" name="headquarters" placeholder="Digite o local onde fica a sede da empresa...">
+                        </div>
                     </div>
                     <br>
-                    <div class="row">
-                        <div class="col-md">
-                            <label>Cidade:</label>
-                            <input type="text" class="form-control" name="cidade" placeholder="Digite a cidade da empresa...">
-                        </div>
 
+                    <div class ="row">   
                         <div class="col-md">
-                            <label>Endereço:</label>
-                            <input type="text" class="form-control" name="endereco" placeholder="Rua...">
+                            <label>Tamanho da Empresa:</label>
+                            <select class ="form-control" name="company-size">
+                                <option value="Pequena">Pequena</option>
+                                <option value="Media">Média</option>
+                                <option value="Grande">Grande</option>
+                            </select>
                         </div>
-
-                    </div>
-                    <br>
-                    <div class="row">
                         <div class="col-md">
                             <label>Nicho de mercado:</label>
-                            <select class="form-control" name="nicho">
+                            <select class="form-control" name="niche">
                                 <option value="M">Marketing</option>
                                 <option value="N">Nutrição</option>
                                 <option value="D">Design</option>
@@ -47,23 +48,25 @@
                         </div>
                     </div>
                     <br>
+
                     <div class="row">
                         <div class="col-md">
-                            <label>Tecnologias usadas:</label>
-                            <select class="form-control" name="tecnologias" multiple>                                
+                            <label>Tecnologias:</label>
+                            <select class="form-control" name="technologies" multiple>                                
                                 <option value=""></option>
-                                
                             </select>
                         </div>
                     </div>
                     <br>
+
                     <div class="row">
                         <div class="col-md">
-                            <label>Característica da empresa:</label>
-                            <textarea name="caracteristicas" class="form-control"></textarea>
+                            <label>Especializações:</label>
+                            <textarea class="form-control" name="specializations"></textarea>
                         </div>
                     </div>
                     <br>
+
                     <div class="row">
                         <div class="col-md">
                             <label>Logo:</label>
@@ -77,6 +80,5 @@
             </div>
         </div>
     </div>
-
 
 {% endblock%}

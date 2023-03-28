@@ -12,12 +12,14 @@ body {
     min-height: 100vh;
     background: #fff;
     color: black;
+    padding-top: 64px;
 }
 
 .nav-bar {
     position: fixed;
     width: 100%;
     display: flex;
+    height: 64px;   ;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
@@ -150,14 +152,11 @@ body {
 }
 
 .ft-box {
-    position: fixed;
     width: 100%;
     z-index: 1000;
     display: flex;
     flex-direction: column;
     align-items: center;
-    right: 0;
-    bottom: 0;
     font-family: 'Inter', sans-serif;
     background-color: transparent;
     padding: 28px 12%;
@@ -189,4 +188,50 @@ body {
 .creators {
     font-size: 10px;
     text-align: center;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.box {
+    padding: 32px;
+    width: 50vw;
+    background: #fff;
+    box-shadow: 2px 2px 4px rgba(0,0,0,.2);
+    font-family: 'Inter', sans-serif;
+}
+
+.header{
+    border-bottom: 1px solid black;
+}
+
+.titulo{
+    color: black;
+}
+
+.body-box{
+    margin-top: 20px;
+}
+
+.btn-orange{
+
+    background-color: #ED8554;
+    color: white;
+}
+
+.btn-orange:hover{
+
+    background-color: #be6136;
+    color: white;
+}
+
+@media (max-width: 1090px)
+{
+    .box{
+        width: 80vw;
+    }
 }

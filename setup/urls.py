@@ -20,5 +20,5 @@ from empresas.views import index
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', include('empresas.urls'))
+    path('home/', include('empresas.urls'))
 ]
