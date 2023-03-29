@@ -277,6 +277,7 @@ Note como a referência ao arquivo css funciona, usando a tag link, usamos a pal
 
 Com a barra de navegação e o cabeçalho feitos, podemos iniciar a criação do formulário responsável por cadastrar uma nova empresa:
 
+
 {% extends "base.html" %}
 
 {% block 'body' %}
