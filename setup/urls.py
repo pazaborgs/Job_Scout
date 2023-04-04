@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from empresas.views import index
+from empresas.views import nova_empresa
 
 urlpatterns = [
     path("admin/", admin.site.urls),

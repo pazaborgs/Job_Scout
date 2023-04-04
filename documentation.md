@@ -402,3 +402,96 @@ class Empresa(models.Model):
         return self.nome
 
 Declaramos relações em Django como classes. No exemplo acima, a relação Empresa tem uma série de atributos (colunas) como logo, nome, email, sede, entre outros. Além disso, note como o Django também abstrai relações múltiplas. No campo tecnologias, declaramos um campo de relação M para N como ManytoManyField e indicamos a relação na qual será responsável por fazer esse pareamento.
+
+## CONFIGURANDO O FORMULARIO
+
+Configuramos o formulário para devolver as informações para a mesma URL em que estamos, a URL de nova_empresa. Captamos as seguintes informações dadas pelo usuário:
+
+    logo = request.FILES.get('logo')
+    name = request.POST.get('name')
+    email = request.POST.get('email')
+    headquarters = request.POST.get('headquarters')
+    technologies = request.POST.getlist('technologies')
+    marketing_niche = request.POST.get('marketing_niche')
+    specializations = request.POST.getlist('specializations')
+
+Que são os campos preenchidos pelo usuário que caracterizam uma empresa no bando de dados. O método request.POST.get irá capturar algum dado específico de uma requisição POST. Criaremos também as validações para que seja mantida a consistencia com o banco quando o usuário adicionar uma empresa:
+
+Inserir VALIDAÇÕES
+
+Essas validações realizam o seguinte, respectivamente:
+
+1. Garante que nenhuma das seguintes caracteristicas (nome, email, sede, nicho e caracteristicas sejam vazias. Alem disso, garante tambem o campo logo contenha uma imagem. Caso nao seja atendido, a pagina retornará um erro
+2. Define um tamanho máximo para o arquivo de logo. Se exceder o limite, retorna um erro e redireciona o usuário para pagina de cadastro novamente.
+3. Garante que o nicho escolhido estará obrigatoriamente nas opções dadas no seletos. Se de alguma forma entrar algum dado inconsistente, retorna um erro e redireciona o usuário para pagina de cadastro novamente.
+
+## CONFIGURANDO AS MENSAGENS DE ERROR
+
+Quite commonly in web applications, you need to display a one-time notification message (also known as “flash message”) to the user after processing a form or some other types of user input.
+
+For this, Django provides full support for cookie- and session-based messaging, for both anonymous and authenticated users. The messages framework allows you to temporarily store messages in one request and retrieve them for display in a subsequent request (usually the next one). Every message is tagged with a specific level that determines its priority (e.g., info, warning, or error).
+
+Messages are implemented through a middleware class and corresponding context processor.
+
+The default settings.py created by django-admin startproject already contains all the settings required to enable message functionality:
+
+    'django.contrib.messages' is in INSTALLED_APPS.
+
+    MIDDLEWARE contains 'django.contrib.sessions.middleware.SessionMiddleware' and 'django.contrib.messages.middleware.MessageMiddleware'.
+
+    The default storage backend relies on sessions. That’s why SessionMiddleware must be enabled and appear before MessageMiddleware in MIDDLEWARE.
+
+    The 'context_processors' option of the DjangoTemplates backend defined in your TEMPLATES setting contains 'django.contrib.messages.context_processors.messages'.
+
+If you don’t want to use messages, you can remove 'django.contrib.messages' from your INSTALLED_APPS, the MessageMiddleware line from MIDDLEWARE, and the messages context processor from TEMPLATES.
+
+The messages framework is based on a configurable level architecture similar to that of the Python logging module. Message levels allow you to group messages by type so they can be filtered or displayed differently in views and templates.
+
+The built-in levels, which can be imported from django.contrib.messages directly, are:
+
+- Constant Purpose
+- DEBUG Development-related messages that will be ignored (or removed) in a production deployment
+- INFO Informational messages for the user
+- SUCCESS An action was successful, e.g. “Your profile was updated successfully”
+- WARNING A failure did not occur but may be imminent
+- ERROR An action was not successful or some other failure occurred
+
+The MESSAGE_LEVEL setting can be used to change the minimum recorded level (or it can be changed per request). Attempts to add messages of a level less than this will be ignored.
+
+Para configurar as mensagens, iremos até settings.py e faremos:
+
+    from django.contrib.messages import constants
+
+    MESSAGE_TAGS = {
+        constants.DEBUG: 'alert-primary',
+        constants.ERROR: 'alert-danger',
+        constants.SUCCESS: 'alert-success',
+        constants.INFO: 'alert-info',
+        constants.WARNING: 'alert-warning',
+    }
+
+Para usar mensagens nas views e nos templates, usamos:
+
+    from django.contrib import messages
+    messages.add_message(request, messages.INFO, 'Hello world.')
+
+Para renderizar e mostrar a mensagem de error, nos templates usaremos:
+
+    {% if messages %}
+        {% for message in messages %}
+            <section class="alert {{message.tags}}">
+                {{message}}
+            </section>
+        {% endfor %}
+    {% endif %}
+
+
+Ao terminar, para salvar tudo no banco de dados, usaremos:
+
+    company.save()
+    company.technologies.add(*technologies)
+    company.save()
+    company.specializations.add(*specializations)
+
+    messages.add_message(request, constants.SUCCESS, 'Empresa cadastrada com sucesso')
+    return redirect('/home/empresas')

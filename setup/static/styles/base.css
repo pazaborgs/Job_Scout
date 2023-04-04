@@ -5,12 +5,15 @@
 }
 
 :root{
-
+    --backgroundcolor: #e8eef1;
+    --secuncolor:#057dcd ;
+    --maincolor:#43b0f1;
+    --darker: #1e3d58;
 }
 
 body {
     min-height: 100vh;
-    background: #fff;
+    background: var(--backgroundcolor);
     color: black;
     padding-top: 64px;
 }
@@ -25,10 +28,11 @@ body {
     z-index: 1000;
     right: 0;
     top: 0;
-    background: transparent;
+    background: var(--maincolor);
     padding: 28px 12%;
     font-family: 'Inter', sans-serif;
     transition: all .50s ease;
+    color: var(--backgroundcolor)
 }
 
 .nav-logo{
@@ -42,13 +46,13 @@ body {
 }
 
 .nav-itens a {
-    color: black;
     font-size: 1.1rem;
     font-weight: 500;
     padding: 5px 0;
     margin: 0 30px;
     transition: all .50s ease;
     text-decoration: none;
+    color: var(--backgroundcolor)
 }
 
 .nav-itens a:hover {
@@ -158,7 +162,7 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: 'Inter', sans-serif;
-    background-color: transparent;
+    background-color: var(--secuncolor);
     padding: 28px 12%;
     gap: 8px;
 }
@@ -200,7 +204,6 @@ body {
 .box {
     padding: 32px;
     width: 50vw;
-    background: #fff;
     box-shadow: 2px 2px 4px rgba(0,0,0,.2);
     font-family: 'Inter', sans-serif;
 }
@@ -209,9 +212,29 @@ body {
     border-bottom: 1px solid black;
 }
 
-.titulo{
+.title{
     color: black;
 }
+
+.row{
+    padding: 12px;
+    border: solid black 1px;
+    border-radius: 12px;
+}
+
+.col-md {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 6px;
+}
+
+.col-md label {
+    display: block;
+    margin: 6px 0;
+}
+
+.form-control {}
 
 .body-box{
     margin-top: 20px;
