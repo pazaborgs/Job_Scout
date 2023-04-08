@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block 'body' %}
+{% extends 'base.html' %}{% load static %} {% block 'head' %}
+<link href="{% static '/styles/empresas_cadastradas.css' %}" rel="stylesheet" />
+{% endblock%} {% block 'body' %}
 
 <div class="wrapper">
   <div class="box">
@@ -6,6 +8,7 @@
       {% if messages %} {% for message in messages %}
       <section class="alert {{message.tags}}">{{message}}</section>
       {% endfor %} {% endif %}
+
       <h2 class="titulo">Gerenciar empresas</h2>
       <a class="btn-nova-empresa">Nova empresa</a>
     </div>
@@ -45,12 +48,16 @@
           <td>{{company.headquarters}}</td>
           <td>
             <select class="form-select">
-              <option></option>
+              {% for tech in company.technologies.all %}
+              <option>{{tech}}</option>
+              {% endfor %}
             </select>
           </td>
           <td>Quantidade de vagas</td>
           <td>
-            <a class="btn-excluir">Excluir empresa</a>
+            <a class="btn-excluir" href="{% url 'excluir_empresa' company.id %}"
+              >Excluir empresa</a
+            >
           </td>
         </tr>
         {% endfor %}

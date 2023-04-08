@@ -1,4 +1,12 @@
-# Porque Django?
+# JobScout
+
+JobScout é um projeto web com intuito de facilitar o acompanhamento e gerenciamento de vagas de emprego. O site permite ao usuário cadastrar empresas e suas vagas de emprego, mantendo em um só local a informação sobre todos os processos seletivos do qual participa. A motivação para o desenvolvimento do projeto foi a falta de um sistema organizacional capaz de acompanhar em um só lugar as vagas de emprego que um usuário está inscrito. O objetivo é criar um projeto web capaz de manter informações sobre vagas cadastradas pelo usuário em uma só base de dados, e ser capaz de fazer consultar eficientes nessa base de dados.
+
+## Tecnologias
+
+O projeto será desenvolvido utilizando conhecimentos de banco de dados relacionais e linguagem SQL, controle de versionamento com Git e Github e framework web Django.
+
+## Porque Django?
 
 - Django é um framework maduro, com mais de uma década no mercado e é usado por grandes empresas como Spotify, Spotify, Youtube…
 - Por ser um framework maduro no mercado, existem uma enorme quantidade de tutoriais e documentação disponível;
@@ -8,7 +16,7 @@
 
 Para iniciarmos nosso projeto, primeiro criaremos um novo aplicativo.
 
-## CSS / Templates
+## Templates e Folha de Estilos
 
 ### Templates
 
@@ -30,154 +38,180 @@ O arquivo base.html é responsável por manter os elementos da página html padr
 
 Vale lembrar que os arquivos carregados vem da pasta static configurada anteriormente. No código html, carregamos a folha de estilos css base.css, que está na pasta styles, dentro de static (nossa pasta padrão para arquivos estáticos):
 
-    {% load static%}
+    ```html
+    {% load static %}
+
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static '/styles/base.css' %}">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-        <link rel="stylesheet"
-    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
+        rel="stylesheet"
+        />
+        <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+        rel="stylesheet"
+        />
+        <link
+        rel="stylesheet"
+        href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+        />
+        <link rel="stylesheet" href="{% static '/styles/base.css' %}" />
+        {% block 'head' %} {% endblock%}
         <title>Job Scout</title>
     </head>
-    <<body>
-        <nav class="nav-bar">
-            <div class="nav-logo">
-                <img src="" alt="Logo">
-            </div>
-            <div class="nav-links">
-                <ul class="nav-itens">
-                    <li><a href="#">Jobs</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="nav-buttons">
-                <button class="nav-login" href="#">Login</button>
-                <button class="nav-signin" href="#">Sign In</button>
-                <div class="bx bx-menu" id="menu-icon"></div>
-            </div>
+    <body>
+        <nav class="navbar navbar--light">
+        <div class="navbar__logo">
+            <img src="" alt="Logo" />
+            <span>Logo</span>
+        </div>
+        <div class="navbar__itens">
+            <ul>
+            <li><a href="#">Jobs</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="navbar__btns">
+            <button class="navbar__btns__login" href="#">Login</button>
+            <button class="navbar__btns__signin" href="#">Sign In</button>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
         </nav>
-        {% block 'body' %}
-        {% endblock %}
-        <footer class="ft-box">
-            <div class="ft-socials">
-                <ul class="ft-icons">
-                    <li><a href="#"><i class="ri-github-fill"></i></a></li>
-                    <li><a href="#"><i class="ri-linkedin-fill"></i></a></li>
-                    <li><a href="#"><i class="ri-instagram-line"></i></a></li>
-                    <li><a href="#"><i class="ri-mail-line"></i></a></li>
-                </ul>
-            </div>
-            <div class="pi-info">
-                <p> Projeto Integrador em Computação  I -- Eixo Computação 2021 </p>
-            </div>
-            <div class="creators">
-                <p>Patrick Regis | Renato Aguetoni</p>
-            </div>
+
+        {% block 'body' %} {% endblock%}
+
+        <footer class="footer footer--light">
+        <div class="footer__socials">
+            <ul>
+            <li>
+                <a href="#"><i class="ri-github-fill"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="ri-linkedin-fill"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="ri-instagram-line"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="ri-mail-line"></i></a>
+            </li>
+            </ul>
+        </div>
+        <div class="footer__piinfo">
+            <p>Projeto Integrador em Computação I — Eixo Computação 2021</p>
+        </div>
+        <div class="footer__credits">
+            <p>Patrick Regis | Renato Aguetoni</p>
+        </div>
         </footer>
     </body>
     </html>
 
+    ```
+
 Note como a referência ao arquivo css funciona, usando a tag link, usamos a palavra static, entre chaves e %, seguida do diretório onde se encontram nossos arquivos estáticos. As tags “block” e “endblock” são blocos de montagem do Django. Elas representam respectivamente onde um código html começa e termina. Isso é necessário pois esta página html é apenas um modelo básico. Esses componentes permitem que na hora de estendermos essa página para outros aplicativos, possamos adicionar conteúdo html entre essas tags, mantendo a barra de navegação e o rodapé intactos.
+
+- [CSS da base](/setup/static/styles/base.css)
 
 Com a barra de navegação e o cabeçalho feitos, podemos iniciar a criação do formulário responsável por cadastrar uma nova empresa. Cadastraremos essa página como nova_empresa.html:
 
+    ```html
     {% extends "base.html" %}
+    {% load static %}
+
+    {% block 'head' %}
+        <link href="{% static 'empresa/css/empresas.css' %}" rel="stylesheet">
+    {% endblock%}
 
     {% block 'body' %}
 
-    <div class="wrapper">
-        <div class="box">
-            <div class="header">
-                <h3 class="title">Nova empresa</h3>
+        <section class="wrapper">
+            <div class="box">
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {{message.tags}}" role="alert">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="header">
+                    <h3 class="title">Nova empresa</h3>
+                </div>
+
+                <div class="body-box">
+                    <form action= "{% url 'nova_empresa' %}" method="post" enctype="multipart/form-data" >
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md">
+                                <label>Nome:</label>
+                                {{form.name}}
+                            </div>
+                            <div class="col-md">
+                                <label>E-mail:</label>
+                                {{form.email}}
+                            </div>
+                            <div class="col-md">
+                                <label>Sede:</label>
+                                {{form.headquarters}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class ="row">
+                            <div class="col-md">
+                                <label>Tamanho da Empresa:</label>
+                                {{form.company_size}}
+                                </select>
+                            </div>
+                            <div class="col-md">
+                                <label>Nicho de mercado:</label>
+                                {{form.marketing_niche}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md">
+                                <label>Tecnologias:</label>
+                                {{form.technologies}}
+                            </div>
+                            <div class="col-md">
+                                <label>Especializações:</label>
+                                {{form.specializations}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md">
+                                <label>Logo:</label>
+                                {{form.logo}}
+                            </div>
+                        </div>
+                        <br>
+                        <input type="submit" value="Nova empresa" class="form__submitbtn">
+                    </form>
+
+                </div>
             </div>
-
-            <div class="body-box">
-                <form action="" method="" enctype="multipart/form-data">
-
-                    <div class="row">
-                        <div class="col-md">
-                            <label>Nome:</label>
-                            <input type="text" class="form-control" name="name" placeholder="Digite seu nome...">
-                        </div>
-
-                        <div class="col-md">
-                            <label>E-mail:</label>
-                            <input type="email" class="form-control" name="email" placeholder="email@gmail.com">
-                        </div>
-
-                        <div class="col-md">
-                            <label>Sede:</label>
-                            <input type="text" class="form-control" name="headquarters" placeholder="Digite o local onde fica a sede da empresa...">
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class ="row">
-                        <div class="col-md">
-                            <label>Tamanho da Empresa:</label>
-                            <select class ="form-control" name="company-size">
-                                <option value="Pequena">Pequena</option>
-                                <option value="Media">Média</option>
-                                <option value="Grande">Grande</option>
-                            </select>
-                        </div>
-                        <div class="col-md">
-                            <label>Nicho de mercado:</label>
-                            <select class="form-control" name="niche">
-                                <option value="M">Marketing</option>
-                                <option value="N">Nutrição</option>
-                                <option value="D">Design</option>
-                            </select>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md">
-                            <label>Tecnologias:</label>
-                            <select class="form-control" name="technologies" multiple>
-                                <option value=""></option>
-                            </select>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md">
-                            <label>Especializações:</label>
-                            <textarea class="form-control" name="specializations"></textarea>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col-md">
-                            <label>Logo:</label>
-                            <input type="file" class="form-control" name="logo">
-                        </div>
-                    </div>
-                    <br>
-                    <input type="submit" value="Nova empresa" class="btn btn-lg btn-orange">
-                </form>
-
-            </div>
-        </div>
-    </div>
+        </section>
 
     {% endblock%}
 
-Na primeira linha, estendemos o html configurado em nase.html, ou seja, teremos um html igual ao da base e podemos adicionar conteúdo nos blocos de componente Django do tipo body que definimos no html da base.
+    ```
+
+Na primeira linha, estendemos o html configurado em base.html, ou seja, teremos um html igual ao da base e podemos adicionar conteúdo nos blocos de componente Django do tipo body que definimos no html da base. Também iremos adicionar conteúdo bloco de construção 'head' para separar o css de cada nova página que criarmos,
 
 Note que no html do app empresas temos vários inputs com informações que caracterizam a empresa a ser cadastrada. Usaremos esses dados em conjunto com o Django para modelar um banco de dados eficiente e que atenda as necessidades da nossa aplicação. O framework Django é capaz de abstrair a modelagem do banco de dados. Na prática, isso quer dizer que não usaremos comandos SQL, mas sim modelamos relações e atributos declarando classes:
 
+    ```python
     from django.db import models
 
     class Technologies(models.Model):
@@ -218,6 +252,7 @@ Note que no html do app empresas temos vários inputs com informações que cara
 
         def __str__(self) -> str:
             return self.name
+    ```
 
 Em Django, declaramos as relações em um banco de dados como classes. No exemplo acima, a relação Company tem uma série de atributos (colunas) como logo, nome, email, sede, entre outros. Note que:
 
@@ -237,6 +272,7 @@ O Django manuseia as seguintes tarefas quando falamos de formulários:
 
 Para usar formulários Django, criamos no aplicativo empresas um arquivo chamado forms.py e dentro dele importamos os recursos disponibilizados pelo django para lidar com formulários: Como já definimos nossos models, criaremos uma classe vamos exdende-la de forms.ModelsForm. Após, criaremos outra classe com o nome Meta e nela definiremos qual relação do banco de dados iremos usar e quais campos nosso formulário terá. No nosso caso, usaremos todos os campos definidos na relação Company:
 
+    ```python
     from django import forms
     from empresas.models import Company
 
@@ -246,8 +282,11 @@ Para usar formulários Django, criamos no aplicativo empresas um arquivo chamado
             model = Company
             fields = '__all__'
 
+    ```
+
 Depois, para renderizar no html é so usar a sintaxe de variável comum, entre {{}}. Segue um exemplo abaixo:
 
+    ```html
     <div class="row">
         <div class="col-md">
             <label>Nome:</label>
@@ -258,6 +297,8 @@ Depois, para renderizar no html é so usar a sintaxe de variável comum, entre {
             <label>E-mail:</label>
             {{form.email}}
         </div>
+
+    ```
 
 ### Validados os Dados
 
@@ -271,6 +312,7 @@ A validação 1 e 3 o formulário Django já realiza para nós. Como nas models 
 
 Para garantirmos a validação número 2, no arquivo forms.py faremos:
 
+    ```python
     def clean_logo(self):
             data =  self.cleaned_data.get('logo')
             filesize= data.size
@@ -279,6 +321,8 @@ Para garantirmos a validação número 2, no arquivo forms.py faremos:
                 raise forms.ValidationError("You cannot upload file more than 10Mb")
             else:
                 return data
+
+    ```
 
 Criamos uma função que terá como argumento o logo cadastrado pelo usuário. Utilizaremos esse logo com o método cleaned_data, que retorna um dicionário com campos de input e seus valores validados. Montamos então um pequeno laço condicional que verifica se o arquivo passado excede o limite de 10Mb. Caso seja muito grande, levantamos um ValidationError, um erro de validação e mandamos o usuário de volta para a página com o formulário.
 
@@ -351,3 +395,39 @@ The labels have been taken straight from admin. I want the user to see just the 
 We need a custom form
 
 In Django, we can use class-based views to generate forms without defining one in forms.py. We can create a custom form class in forms.py where we can choose which of Django’s form widgets get used for each field.
+
+## Listando as Empresas Cadastradas
+
+Com o cadastro finalizado, agora precisamos de uma página para exibir as empresas cadastradas no banco de dados. Para isso, criaremos uma nova url no aplicativo empresas:
+
+    path('empresas_cadastradas', empresas_cadastradas, name="empresas_cadastradas")
+
+Criaremos tambem uma função nas views responsável por renderizar o html da página. Além disso, essa função será responsável por enviar a página as empresas, suas tecnologias e suas especializações:
+
+    ```python
+    def empresas_cadastradas(request):
+
+        companies = Company.objects.all()
+        technologies = Technologies.objects.all()
+        specializations = Specializations.objects.all()
+        return render(request, 'empresas_cadastradas.html', {'companies': companies, 'technologies': technologies, 'specializations': specializations})
+    ```
+
+- [HTML empresas cadastradas](/templates/empresas_cadastradas.html)
+- [CSS empresas cadastradas](/setup/static/styles/empresas_cadastradas.css)
+
+### Deletando as Empresas
+
+Vamos adicionar a funcionalidade de deletar empresas do banco de dados. Para isso, primeiramente criaremos uma nova url para direcionarmos a informação do click no botão deletar. Essa url será responsável por processar a requisição e nos mandar de volta para a tela de empresas cadastradas:
+
+    ```python
+    path('excluir_empresa/<int:id>', excluir_empresa, name="excluir_empresa")
+    ```
+
+Criaremos também a view responsável por essa url. Nossa view irá ter como argumento a requisçao HTTP e o id passado por url. Com o id da empresa em mãos, faremos uma busca no banco de dados pela empresa que contém esse id e iremos deleta-la usando o método delete():
+
+    def excluir_empresa(request, id):
+        company = Company.objects.get(id = id)
+        company.delete()
+        messages.add_message(request, constants.SUCCESS, 'Empresa excluída com sucesso')
+        return redirect('/home/empresas_cadastradas')

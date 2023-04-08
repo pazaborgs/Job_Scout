@@ -32,3 +32,9 @@ def empresas_cadastradas(request):
     technologies = Technologies.objects.all()
     specializations = Specializations.objects.all()
     return render(request, 'empresas_cadastradas.html', {'companies': companies, 'technologies': technologies, 'specializations': specializations})
+
+def excluir_empresa(request, id):
+    company = Company.objects.get(id = id)
+    company.delete()
+    messages.add_message(request, constants.SUCCESS, 'Empresa excluída com sucesso')
+    return redirect('/home/empresas_cadastradas')

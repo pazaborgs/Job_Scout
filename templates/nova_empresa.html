@@ -1,18 +1,17 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block 'head' %}
+    <link href="{% static '/styles/nova_empresa.css' %}" rel="stylesheet">
+{% endblock%}
+
 {% block 'body' %}
 
     <section class="wrapper">
         <div class="box">
 
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert {{message.tags}}" role="alert">
-                        {{message}}
-                    </div>
-                {% endfor %}
-            {% endif %}
-
             <div class="header">
+                {% include 'messages.html' %}
                 <h3 class="title">Nova empresa</h3>
             </div>
 
