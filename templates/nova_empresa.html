@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block 'body' %}
 
     <section class="wrapper">
@@ -24,17 +23,17 @@
                     <div class="row">
                         <div class="col-md">
                             <label>Nome:</label>
-                            <input type="text" class="form-control" name="name" placeholder="Digite seu nome...">
+                            {{form.name}}
                         </div>
 
                         <div class="col-md">
                             <label>E-mail:</label>
-                            <input type="email" class="form-control" name="email" placeholder="email@gmail.com">
+                            {{form.email}}
                         </div>
 
                         <div class="col-md">
                             <label>Sede:</label>
-                            <input type="text" class="form-control" name="headquarters" placeholder="Digite o local onde fica a sede da empresa...">
+                            {{form.headquarters}}
                         </div>
                     </div>
                     <br>
@@ -42,19 +41,14 @@
                     <div class ="row">   
                         <div class="col-md">
                             <label>Tamanho da Empresa:</label>
-                            <select class ="form-control" name="company-size">
-                                <option value="Pequena">Pequena</option>
-                                <option value="Media">Média</option>
-                                <option value="Grande">Grande</option>
+                            {{form.company_size}}
+                            
+                            
                             </select>
                         </div>
                         <div class="col-md">
                             <label>Nicho de mercado:</label>
-                            <select class="form-control" name="niche">
-                                <option value="M">Marketing</option>
-                                <option value="N">Nutrição</option>
-                                <option value="D">Design</option>
-                            </select>
+                            {{form.marketing_niche}}
                         </div>
                     </div>
                     <br>
@@ -62,18 +56,11 @@
                     <div class="row">
                         <div class="col-md">
                             <label>Tecnologias:</label>
-                            <select class="form-control" name="technologies" multiple>                                
-                                {% for tech in techs %}
-                                    <option value="{{tech.id}}">{{tech.technologies}}</option>
-                                {% endfor %}
-                            </select>
+                            {{form.technologies}}
                         </div>
                         <div class="col-md">
                             <label>Especializações:</label>
-                            <select class="form-control" name="specializations" multiple>    
-                            {% for spec in specs %}
-                                    <option value="{{spec.id}}">{{specs.technologies}}</option>
-                            {% endfor %}
+                            {{form.specializations}}
                         </div>
                     </div>
                     <br>
@@ -81,11 +68,11 @@
                     <div class="row">
                         <div class="col-md">
                             <label>Logo:</label>
-                            <input type="file" class="form-control" name="logo">
+                            {{form.logo}}
                         </div>
                     </div>
                     <br>
-                    <input type="submit" value="Nova empresa" class="btn btn-lg btn-orange">
+                    <input type="submit" value="Nova empresa" class="form__submitbtn">
                 </form>
                 
             </div>

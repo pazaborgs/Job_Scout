@@ -4,7 +4,11 @@
 - Por ser um framework maduro no mercado, existem uma enorme quantidade de tutoriais e documentação disponível;
 - Django é um framework que vem com “pilhas inclusas”, ou seja, ele é já é capaz por natureza de permitir uma séria de implementações comuns mas complexas de maneira agilizada e em um curto espaço de tempo.
 
-## CSS  / Templates
+## Iniciando o Projeto
+
+Para iniciarmos nosso projeto, primeiro criaremos um novo aplicativo.
+
+## CSS / Templates
 
 ### Templates
 
@@ -81,206 +85,13 @@ Vale lembrar que os arquivos carregados vem da pasta static configurada anterior
     </body>
     </html>
 
-Note como a referência ao arquivo css funciona, usando a tag link, usamos a palavra static, entre chaves e %, seguida do diretório onde se encontram nossos arquivos estáticos. As tags “block” e “endblock” são blocos de montagem do Django. Elas representam respectivamente onde um código html começa e termina. Isso é necessário pois esta página html é apenas um modelo básico. Esses componentes permitem que na hora de estendermos essa página para outros aplicativos, possamos adicionar conteúdo html entre essas tags, mantendo a barra de navegação e o rodapé intactos. Segue o css da base:
+Note como a referência ao arquivo css funciona, usando a tag link, usamos a palavra static, entre chaves e %, seguida do diretório onde se encontram nossos arquivos estáticos. As tags “block” e “endblock” são blocos de montagem do Django. Elas representam respectivamente onde um código html começa e termina. Isso é necessário pois esta página html é apenas um modelo básico. Esses componentes permitem que na hora de estendermos essa página para outros aplicativos, possamos adicionar conteúdo html entre essas tags, mantendo a barra de navegação e o rodapé intactos.
 
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
+Com a barra de navegação e o cabeçalho feitos, podemos iniciar a criação do formulário responsável por cadastrar uma nova empresa. Cadastraremos essa página como nova_empresa.html:
 
-    :root{
+    {% extends "base.html" %}
 
-    }
-
-    body {
-        min-height: 100vh;
-        background: #fff;
-        color: black;
-        padding-top: 64px;
-    }
-
-    .nav-bar {
-        position: fixed;
-        width: 100%;
-        display: flex;
-        height: 64px;   ;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 1000;
-        right: 0;
-        top: 0;
-        background: transparent;
-        padding: 28px 12%;
-        font-family: 'Inter', sans-serif;
-        transition: all .50s ease;
-    }
-
-    .nav-logo{
-        font-weight:900;
-        font-size: 1.3rem;
-    }
-
-    .nav-itens {
-        list-style: none;
-        display: flex;
-    }
-
-    .nav-itens a {
-        color: black;
-        font-size: 1.1rem;
-        font-weight: 500;
-        padding: 5px 0;
-        margin: 0 30px;
-        transition: all .50s ease;
-        text-decoration: none;
-    }
-
-    .nav-itens a:hover {
-        color: red;
-    }
-
-    .nav-buttons {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .nav-login {
-        padding: 10px 40px;
-        font-size: 1rem;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all .50s ease;
-    }
-
-    .nav-login:hover {
-        background-color: #a1a1a1;
-    }
-
-    .nav-signin {
-        padding: 10px 40px;
-        font-size: 1.1rem;
-        font-weight: 500;
-        border: none;
-        border-radius: 5px;
-        color: #f2f2f2;
-        background-color: #202020;
-        cursor: pointer;
-        transition: all .50s ease;
-    }
-
-    .nav-signin:hover {
-        background-color: #3d3d3d;
-    }
-
-    # menu-icon{
-        align-items: center;
-        font-size: 2rem;
-        z-index: 10001;
-        display: none;
-    }
-
-    @media (max-width: 1280px){
-        .nav-bar{
-            padding: 14px 2%;
-            transition: .2s;
-        }
-
-        .nav-itens a{
-            padding: 5px 0;
-            margin: 0px 20px;
-        }
-    }
-
-    @media (max-width: 1090px){
-        #menu-icon{
-            display: block;
-        }
-
-        .nav-itens{
-            position: absolute;
-            top:100%;
-            right: -100%;
-            width: 270px;
-            height: 29vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            border-radius: 10px;
-            transition: all .50 ease;
-            background-color: #202020;
-        }
-
-        .nav-itens a{
-            display: block;
-            margin: 12px 0;
-            padding: 0 25px;
-            transition: all .50 ease;
-            color: #f2f2f2
-        }
-
-        .nav-itens a:hover{
-           color:cyan;
-           transform: translateY(5px);
-        }
-
-        .nav-itens .open{
-            right: 2%;
-        }
-
-        .pi-info{
-            display: none;
-        }
-
-    }
-
-    .ft-box {
-        width: 100%;
-        z-index: 1000;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-family: 'Inter', sans-serif;
-        background-color: transparent;
-        padding: 28px 12%;
-        gap: 8px;
-    }
-
-    .ft-icons {
-        display: flex;
-        list-style: none;
-        font-size: 1.8rem;
-        gap: 24px;
-    }
-
-    .ft-icons a {
-        text-decoration: none;
-        color: black;
-    }
-
-    .ft-icons a:hover {
-        color: red;
-        transition: all .50s ease;
-    }
-
-    .pi-info {
-        font-size: 12px;
-        text-align: center;
-    }
-
-    .creators {
-        font-size: 10px;
-        text-align: center;
-    }
-
-Com a barra de navegação e o cabeçalho feitos, podemos iniciar a criação do formulário responsável por cadastrar uma nova empresa:
-
-
-{% extends "base.html" %}
-
-{% block 'body' %}
+    {% block 'body' %}
 
     <div class="wrapper">
         <div class="box">
@@ -309,7 +120,7 @@ Com a barra de navegação e o cabeçalho feitos, podemos iniciar a criação do
                     </div>
                     <br>
 
-                    <div class ="row">   
+                    <div class ="row">
                         <div class="col-md">
                             <label>Tamanho da Empresa:</label>
                             <select class ="form-control" name="company-size">
@@ -332,7 +143,7 @@ Com a barra de navegação e o cabeçalho feitos, podemos iniciar a criação do
                     <div class="row">
                         <div class="col-md">
                             <label>Tecnologias:</label>
-                            <select class="form-control" name="technologies" multiple>                                
+                            <select class="form-control" name="technologies" multiple>
                                 <option value=""></option>
                             </select>
                         </div>
@@ -356,94 +167,128 @@ Com a barra de navegação e o cabeçalho feitos, podemos iniciar a criação do
                     <br>
                     <input type="submit" value="Nova empresa" class="btn btn-lg btn-orange">
                 </form>
-                
+
             </div>
         </div>
     </div>
 
-{% endblock%}
+    {% endblock%}
 
 Na primeira linha, estendemos o html configurado em nase.html, ou seja, teremos um html igual ao da base e podemos adicionar conteúdo nos blocos de componente Django do tipo body que definimos no html da base.
 
-Note que no html do app empresas temos vários inputs com informações que caracterizam a empresa a ser cadastrada. Usaremos esses dados em conjunto com o Django para modelar um banco de dados eficiente e que atenda as necessidades da nossa aplicação.
+Note que no html do app empresas temos vários inputs com informações que caracterizam a empresa a ser cadastrada. Usaremos esses dados em conjunto com o Django para modelar um banco de dados eficiente e que atenda as necessidades da nossa aplicação. O framework Django é capaz de abstrair a modelagem do banco de dados. Na prática, isso quer dizer que não usaremos comandos SQL, mas sim modelamos relações e atributos declarando classes:
 
-O framework Django é capaz de abstrair a modelagem do banco de dados. Na prática, isso quer dizer que não usaremos comandos SQL, mas sim modelamos relações e atributos declarando classes:
+    from django.db import models
 
-from django.db import models
+    class Technologies(models.Model):
+        technology = models.CharField(max_length=30)
 
-class Tecnologias(models.Model):
-    tecnologia = models.CharField(max_length=30)
+        def __str__(self):
+            return self.technology
 
-    def __str__(self):
-        return self.tecnologia
+    class Specializations(models.Model):
+        specialization = models.CharField(max_length=30)
 
-class Empresa(models.Model):
+        def __str__(self):
+            return self.specialization
 
-    choices_size = (
-        ('Pequena', 'Até 10 pessoas'),
-        ('Média', 'Até 100 pessoas'),
-        ('Grande', 'Mais de 1000 pessoas'),
-    )
-    choices_niche = (
-        ('M', 'Marketing'),
-        ('N', 'Nutrição'),
-        ('D', 'Design'),
-    )
+    class Company(models.Model):
 
-    logo = models.ImageField(upload_to='logo_empresa')
-    name = models.CharField(max_length=30)
-    email = models.EmailField()
-    headquarters = models.CharField(max_length=30)
-    technologies = models.ManyToManyField(Tecnologias)
-    marketing_niche = models.CharField(max_length=3, choices=choices_niche)
-    specifications = models.TextField()
+        choices_size = (
+            ('Micro', 'Até 19 colaboradores'),
+            ('Pequena', '20 à 99 colaboradores'),
+            ('Media', '100 à 499 colaboradores'),
+            ('Grande', 'Acima de 500 colaboradores'),
+        )
+        choices_niche = (
+            ('M', 'Marketing'),
+            ('T', 'Tecnologia'),
+            ('N', 'Nutrição'),
+            ('D', 'Design'),
+        )
 
-    def __str__(self) -> str:
-        return self.nome
+        name = models.CharField(max_length=30)
+        email = models.EmailField()
+        headquarters = models.CharField(max_length=30)
+        company_size = models.CharField(max_length=30, choices= choices_size)
+        marketing_niche = models.CharField(max_length=3, choices=choices_niche)
+        technologies = models.ManyToManyField(Technologies)
+        specializations = models.ManyToManyField(Specializations)
+        logo = models.ImageField(upload_to='company_logo')
 
-Declaramos relações em Django como classes. No exemplo acima, a relação Empresa tem uma série de atributos (colunas) como logo, nome, email, sede, entre outros. Além disso, note como o Django também abstrai relações múltiplas. No campo tecnologias, declaramos um campo de relação M para N como ManytoManyField e indicamos a relação na qual será responsável por fazer esse pareamento.
+        def __str__(self) -> str:
+            return self.name
 
-## CONFIGURANDO O FORMULARIO
+Em Django, declaramos as relações em um banco de dados como classes. No exemplo acima, a relação Company tem uma série de atributos (colunas) como logo, nome, email, sede, entre outros. Note que:
 
-Configuramos o formulário para devolver as informações para a mesma URL em que estamos, a URL de nova_empresa. Captamos as seguintes informações dadas pelo usuário:
+- Declaramos as colunas definindo seu nome e o tipo de dado que a coluna terá;
+- No campo tecnologias, declaramos um campo de relação M para N como ManytoManyField e indicamos a relação na qual será responsável por fazer esse pareamento. Com Django é fácil modelar campos de dados multivalorados;
+- Também é possível declarar facilmente campos de escolha (Choices). Para isso, criamos uma variável responsável por manter as possíveis escolhas do usuário e a referenciamos utilizando a sintaxe choices=variável. No código, nossas variáveis choice são choices_niche e choices_size.
 
-    logo = request.FILES.get('logo')
-    name = request.POST.get('name')
-    email = request.POST.get('email')
-    headquarters = request.POST.get('headquarters')
-    technologies = request.POST.getlist('technologies')
-    marketing_niche = request.POST.get('marketing_niche')
-    specializations = request.POST.getlist('specializations')
+## Configurando os Formulários
 
-Que são os campos preenchidos pelo usuário que caracterizam uma empresa no bando de dados. O método request.POST.get irá capturar algum dado específico de uma requisição POST. Criaremos também as validações para que seja mantida a consistencia com o banco quando o usuário adicionar uma empresa:
+Manusear formulários é uma tarefa complexa. Felizmente podemos criar um formulário Django e deixar todo o processo de processamento do formulário nas mãos do framework. O formulário Django simplifica e automatiza uma vasta porção do trabalho complexo relacionado a formulários, além de manter o código mais seguro e a prova de falhas.
 
-Inserir VALIDAÇÕES
+O Django manuseia as seguintes tarefas quando falamos de formulários:
 
-Essas validações realizam o seguinte, respectivamente:
+- Preparar e reconstruir dados para renderiza-la;
+- Criar formulários HTML para os dados;
+- Receber e processar formulários com dados enviados pelo usuário.
 
-1. Garante que nenhuma das seguintes caracteristicas (nome, email, sede, nicho e caracteristicas sejam vazias. Alem disso, garante tambem o campo logo contenha uma imagem. Caso nao seja atendido, a pagina retornará um erro
-2. Define um tamanho máximo para o arquivo de logo. Se exceder o limite, retorna um erro e redireciona o usuário para pagina de cadastro novamente.
-3. Garante que o nicho escolhido estará obrigatoriamente nas opções dadas no seletos. Se de alguma forma entrar algum dado inconsistente, retorna um erro e redireciona o usuário para pagina de cadastro novamente.
+Para usar formulários Django, criamos no aplicativo empresas um arquivo chamado forms.py e dentro dele importamos os recursos disponibilizados pelo django para lidar com formulários: Como já definimos nossos models, criaremos uma classe vamos exdende-la de forms.ModelsForm. Após, criaremos outra classe com o nome Meta e nela definiremos qual relação do banco de dados iremos usar e quais campos nosso formulário terá. No nosso caso, usaremos todos os campos definidos na relação Company:
 
-## CONFIGURANDO AS MENSAGENS DE ERROR
+    from django import forms
+    from empresas.models import Company
 
-Quite commonly in web applications, you need to display a one-time notification message (also known as “flash message”) to the user after processing a form or some other types of user input.
+    class CadastroEmpresa(forms.ModelForm):
 
-For this, Django provides full support for cookie- and session-based messaging, for both anonymous and authenticated users. The messages framework allows you to temporarily store messages in one request and retrieve them for display in a subsequent request (usually the next one). Every message is tagged with a specific level that determines its priority (e.g., info, warning, or error).
+        class Meta:
+            model = Company
+            fields = '__all__'
 
-Messages are implemented through a middleware class and corresponding context processor.
+Depois, para renderizar no html é so usar a sintaxe de variável comum, entre {{}}. Segue um exemplo abaixo:
 
-The default settings.py created by django-admin startproject already contains all the settings required to enable message functionality:
+    <div class="row">
+        <div class="col-md">
+            <label>Nome:</label>
+            {{form.name}}
+        </div>
 
-    'django.contrib.messages' is in INSTALLED_APPS.
+        <div class="col-md">
+            <label>E-mail:</label>
+            {{form.email}}
+        </div>
 
-    MIDDLEWARE contains 'django.contrib.sessions.middleware.SessionMiddleware' and 'django.contrib.messages.middleware.MessageMiddleware'.
+### Validados os Dados
 
-    The default storage backend relies on sessions. That’s why SessionMiddleware must be enabled and appear before MessageMiddleware in MIDDLEWARE.
+Vamos configurar validações para que o formulário somente recebe dados consistentes com os formatos definidos no banco de dados. Inicialmente, precisamos das seguintes validações:
 
-    The 'context_processors' option of the DjangoTemplates backend defined in your TEMPLATES setting contains 'django.contrib.messages.context_processors.messages'.
+1. Garantir que nenhum campo esteja vazio.
+2. Definir um tamanho máximo para o arquivo de logo. Se exceder o limite, retorna um erro e redireciona o usuário para pagina de cadastro novamente.
+3. Garantir que o nicho escolhido estará obrigatoriamente nas opções dadas no seletos. Se de alguma forma entrar algum dado inconsistente, retorna um erro e redireciona o usuário para pagina de cadastro novamente.
 
-If you don’t want to use messages, you can remove 'django.contrib.messages' from your INSTALLED_APPS, the MessageMiddleware line from MIDDLEWARE, and the messages context processor from TEMPLATES.
+A validação 1 e 3 o formulário Django já realiza para nós. Como nas models os campos foram definidos como obrigatórios, não será possível cadastrar o formulário com campos vazios ou nichos e tamanhos de empresa que não se encontrem nas variáveis choice dentro de models.py
+
+Para garantirmos a validação número 2, no arquivo forms.py faremos:
+
+    def clean_logo(self):
+            data =  self.cleaned_data.get('logo')
+            filesize= data.size
+
+            if filesize > 100_000_000:
+                raise forms.ValidationError("You cannot upload file more than 10Mb")
+            else:
+                return data
+
+Criamos uma função que terá como argumento o logo cadastrado pelo usuário. Utilizaremos esse logo com o método cleaned_data, que retorna um dicionário com campos de input e seus valores validados. Montamos então um pequeno laço condicional que verifica se o arquivo passado excede o limite de 10Mb. Caso seja muito grande, levantamos um ValidationError, um erro de validação e mandamos o usuário de volta para a página com o formulário.
+
+## Configurando as Mensagens de Erro
+
+É muito comum em aplicações web a necessidade de renderizar mensagens flash (flash messages) ao usuário, após o processamento de um formulário ou input. Essas mensagens flash servem para informar ao usuário o resultado da transação, se ela foi um sucesso, se houve falhas, entre outros.
+
+O Django provê um suporte completo para implementação dessas mensagens, através do framework de mensagens. O message framework permite temporariamente armazenar mensagens em uma requisição e recupera-la para mostrar com uma request subsequente. Cada mensagem é etiquetada com um nível específico, que determina sua prioridade (info, warning, error)
+
+O arquivo padrão settings.py criado por django-admin startproject já contem todas as configurações necesárias para habilitar as mensagens.
 
 The messages framework is based on a configurable level architecture similar to that of the Python logging module. Message levels allow you to group messages by type so they can be filtered or displayed differently in views and templates.
 
@@ -485,7 +330,6 @@ Para renderizar e mostrar a mensagem de error, nos templates usaremos:
         {% endfor %}
     {% endif %}
 
-
 Ao terminar, para salvar tudo no banco de dados, usaremos:
 
     company.save()
@@ -495,3 +339,15 @@ Ao terminar, para salvar tudo no banco de dados, usaremos:
 
     messages.add_message(request, constants.SUCCESS, 'Empresa cadastrada com sucesso')
     return redirect('/home/empresas')
+
+MANYTOMANY FIELD
+
+This is okay. The core functionality is there but the form needs a lot of work.
+
+For one, I need to cmd-click to select multiple users. This is bad for user experience; checkboxes would be much more user-friendly.
+
+The labels have been taken straight from admin. I want the user to see just the first name, not the user’s email as well.
+
+We need a custom form
+
+In Django, we can use class-based views to generate forms without defining one in forms.py. We can create a custom form class in forms.py where we can choose which of Django’s form widgets get used for each field.

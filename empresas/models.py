@@ -19,25 +19,26 @@ class Company(models.Model):
         ('Micro', 'Até 19 colaboradores'),
         ('Pequena', '20 à 99 colaboradores'),
         ('Media', '100 à 499 colaboradores'),
-        ('Grande', 'Acima de 500 colaboradores'),
+        ('Grande', 'Acima de 500 colaboradores')
     )
     choices_niche = (
         ('M', 'Marketing'),
         ('T', 'Tecnologia'),
         ('N', 'Nutrição'),
-        ('D', 'Design'),
+        ('D', 'Design')
     )
 
-    logo = models.ImageField(upload_to='logo_empresa')
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=50)
     email = models.EmailField()
     headquarters = models.CharField(max_length=30)
-    technologies = models.ManyToManyField(Technologies)
+    company_size = models.CharField(max_length=30, choices= choices_size)
     marketing_niche = models.CharField(max_length=3, choices=choices_niche)
+    technologies = models.ManyToManyField(Technologies)
     specializations = models.ManyToManyField(Specializations)
+    logo = models.ImageField(upload_to='company_logo')
 
     def __str__(self) -> str:
-        return self.nome
+        return self.name
 
 class Jobs(models.Model):
     choices_experience = (
