@@ -71,3 +71,8 @@
   border-radius: 10px;
   font-weight: bold;
 }
+
+img {
+  width: 15 px;
+  height: 15px;
+}

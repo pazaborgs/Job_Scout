@@ -1,10 +1,10 @@
 from django.contrib import messages
 from django.contrib.messages import constants
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
-from empresas.forms import CadastroEmpresa
+from empresas.forms import CadastroEmpresa, CadastroVaga
 
-from .models import Company, Specializations, Technologies
+from .models import Company, Jobs, Technologies
 
 
 def nova_empresa(request):
@@ -28,10 +28,26 @@ def nova_empresa(request):
 
 def empresas_cadastradas(request):
 
+    name_filter = request.GET.get('name')
+    techs_filter = request.GET.get('technologies')
     companies = Company.objects.all()
-    technologies = Technologies.objects.all()
-    specializations = Specializations.objects.all()
-    return render(request, 'empresas_cadastradas.html', {'companies': companies, 'technologies': technologies, 'specializations': specializations})
+
+    if name_filter:
+        companies = companies.filter(name__icontains = name_filter)
+
+    if techs_filter:
+        companies = companies.filter(technologies = techs_filter)
+    
+    techs = Technologies.objects.all()
+    return render(request, 'empresas_cadastradas.html', {'companies': companies, 'techs': techs})
+
+
+def empresa_unica(request, id):
+    form = CadastroVaga()
+    unique_company = get_object_or_404(Company, id=id)
+    jobs = Jobs.objects.filter(company_id = id)
+    return render(request, 'empresa_unica.html', {'company': unique_company, 'form':form, 'jobs':jobs}) 
+    
 
 def excluir_empresa(request, id):
     company = Company.objects.get(id = id)

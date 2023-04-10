@@ -431,3 +431,152 @@ Criaremos também a view responsável por essa url. Nossa view irá ter como arg
         company.delete()
         messages.add_message(request, constants.SUCCESS, 'Empresa excluída com sucesso')
         return redirect('/home/empresas_cadastradas')
+
+### Quantidade de Vagas
+
+Vamos listar quantas vagas cadastradas cada empresa tem. Para isso, em models.py, na relação Company adicionaremos a seguinte função:
+
+    ```python
+    def qtd_vagas(self):
+        return Jobs.objects.filter(company__id=self.id).count()
+    ```
+
+Essa função é responsável por filtrar o número de vagas de cada empresa cadastrada.
+
+### Filtrando Empresas
+
+Para filtrar somente as empresas que temos interesse, primeiramente no formulário do arquivo html das empresas cadastradas vamos adicionar a seguinte linha de código:
+
+    ```html
+    <form action="{% url 'empresas_cadastradas' %}" method="GET">
+    ```
+
+O formulário do filtro terá o método GET e irá nos redirecionar para a página de empresa cadastradas. Nas views, adicionaremos os filtros:
+
+    ```python
+    def empresas_cadastradas(request):
+
+        name_filter = request.GET.get('name')
+        techs_filter = request.GET.get('technologies')
+        companies = Company.objects.all()
+
+        if name_filter:
+            companies = companies.filter(name__icontains = name_filter)
+
+        if techs_filter:
+            companies = companies.filter(technologies = techs_filter)
+
+        techs = Technologies.objects.all()
+        return render(request, 'empresas_cadastradas.html', {'companies': companies, 'techs': techs})
+    ```
+
+A funcionalidade é a seguinte: estamos passando as empresas a serem renderizadas, a variável de contexto companies, com um filtro. O filtro tem duas observações: se na lista de empresas cadastradas existe alguma com nome similar ao passado no formulário do filtro e se tem a tecnologia selecionada no filtro. A variável de contexto companies muda de acordo com os filtros, renderizando somente as empresas que passam no filtro.
+
+# Acessando Empresas Cadastradas
+
+Primeiro, criaremos a URL responsável por acessar as empresas:
+
+    ```python
+    path('empresa_unica/<int:id>', empresa_unica, name='empresa_unica' )
+    ```
+
+Nas views das empresas, faremos:
+
+    ```python
+    def empresa_unica(request, id):
+        form = CadastroVaga()
+        unique_company = get_object_or_404(Company, id=id)
+        jobs = Jobs.objects.filter(company_id = id)
+        return render(request, 'empresa_unica.html', {'company': unique_company, 'form':form, 'jobs':jobs})
+    ```
+
+Criamos uma view para lidar com a url das empresas cadastradas. Chamaos de empresa_unica e junto a ela na url passamos também o id da empresa, para podermos acessar cada uma individualmente. Na view, passamos as informações relacionadas a vaga na variável de contexto unique_company. O formulário que passamos é responsável por podermos cadastrar novas vagas dentro de uma empresa. A variável de contexto jobs serve para podermos renderizar as vagas do banco de dados no html da empresa.
+
+[HTML da empresa](/templates/empresa_unica.html)
+
+## Cadastrando Vagas
+
+### Formulário para o Cadastro
+
+Para cadastrarmos vagas, precisamos criar uma nova página html para lidar com o modal. Iremos usar o modal do Bootstrap para renderizar um pequeno formulário onde o usuário poderá cadastrar as vagas.
+
+[HTML do modal](/templates/modal.html)
+
+Em forms.py também criaremos o formulário que usaremos para pegar os dados do modal:
+
+    ```python
+    class CadastroVaga(forms.ModelForm):
+
+        class Meta:
+            model = Jobs
+            fields = '__all__'
+
+        title = forms.CharField(label = '', widget=forms.TextInput(attrs = {'placeholder': 'Título da Vaga'}))
+    ```
+
+Como já configuramos as views anteriormente, podemos criar o aplicativo Django responsável por lidar com o cadastro das vagas.
+
+### Aplicativo de Vagas
+
+    python3 manage.py startapp jobs
+
+Crie as url em setup, urls.py:
+
+    ```python
+    path('jobs/', include('jobs.urls'))
+    ```
+
+Configure as views de jobs, em views.py:
+
+    ```python
+    from django.contrib import messages
+    from django.contrib.messages import constants
+    from django.shortcuts import redirect
+
+    from empresas.forms import CadastroVaga
+
+
+        def nova_vaga(request):
+            if request.method == 'POST':
+                form = CadastroVaga(request.POST)
+                company_id = request.POST.get('company')
+                if form.is_valid():
+                    form.save()
+                    messages.add_message(request, constants.SUCCESS, 'Vaga cadastrada com sucesso')
+                    return redirect(f'/home/empresa_unica/{company_id}')
+                else:
+                    messages.add_message(request, constants.ERROR, 'Ocorreu um erro')
+    ```
+
+Agora é so listar as vagas no html da empresa_unica:
+
+    ```html
+    {% for job in jobs %}
+        <div class="col-md">
+            <div class="box-vagas">
+                <div class="header-vagas">{{job.title}}</div>
+
+                <div class="body-vagas">
+                <div class="row">
+                    <div class="col-md">
+                    <label class="paragrafo">Nível:</label>
+                    <br />
+                    <label class="paragrafo paragrafo-orange"
+                        >{{job.get_experience_display}}</label
+                    >
+                    </div>
+
+                    <div class="col-md">
+                    <label class="paragrafo"
+                        >Status <img src="{% static 'empresa/img/flag_green.png' %}"
+                    /></label>
+                    <br />
+                    <label class="paragrafo paragrafo-orange"
+                        >{{job.get_status_display}}</label
+                    >
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        ```

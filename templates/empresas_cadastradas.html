@@ -14,20 +14,22 @@
     </div>
     <div class="borda-box"></div>
     <div class="body-box">
-      <form>
+      <form action="{% url 'empresas_cadastradas' %}" method="GET">
         <div class="row">
           <div class="col-md-5">
             <input
               type="text"
               placeholder="Busque pelo nome"
               class="form-control"
-              name="nome"
+              name="name"
             />
           </div>
 
           <div class="col-md-4">
-            <select class="form-select" name="tecnologias">
-              <option value="">--------</option>
+            <select class="form-select" name="technologies">
+              {% for tech in techs%}
+              <option value="{{tech.id}}">{{tech}}</option>
+              {% endfor %}
             </select>
           </div>
 
@@ -53,7 +55,13 @@
               {% endfor %}
             </select>
           </td>
-          <td>Quantidade de vagas</td>
+          <td>
+            {% if Company.qtd_vagas > 0 %}
+            <img src="{% static '/assets/flag_green.png' %}" />
+            {% else %}
+            <img src="{% static '/assets/flag_red.png' %}" />
+            {% endif %} {{Company.qtd_vagas}}
+          </td>
           <td>
             <a class="btn-excluir" href="{% url 'excluir_empresa' company.id %}"
               >Excluir empresa</a

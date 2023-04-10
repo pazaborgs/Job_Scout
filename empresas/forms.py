@@ -1,6 +1,6 @@
 from django import forms
 
-from empresas.models import Company, Specializations, Technologies
+from empresas.models import Company, Jobs, Specializations, Technologies
 
 
 class CadastroEmpresa(forms.ModelForm):
@@ -29,4 +29,11 @@ class CadastroEmpresa(forms.ModelForm):
             raise forms.ValidationError("You cannot upload file more than 10Mb")
         else:
             return data
-        
+
+class CadastroVaga(forms.ModelForm):
+    
+    class Meta:
+        model = Jobs
+        fields = '__all__'
+
+    title = forms.CharField(label = '', widget=forms.TextInput(attrs = {'placeholder': 'Título da Vaga'}))

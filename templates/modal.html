@@ -1,0 +1,83 @@
+<div
+  class="modal fade"
+  id="modalExemplo"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Fechar"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'nova_vaga' %}" method="POST">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md">
+              <label>Nova Vagas:</label>
+              {{form.title}}
+            </div>
+            <div class="col-md">
+              <label>Horas de Trabalho:</label>
+              {{form.position_type}}
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md">
+              <label>Tecnologias que já domino:</label>
+              {{form.technologies_mastered}}
+            </div>
+
+            <div class="col-md">
+              <label>Tecnologias que não domino:</label>
+              {{form.technologies_study}}
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md">
+              <label>Nível de experiência:</label>
+              {{form.experience}}
+            </div>
+
+            <div class="col-md">
+              <label>Data final:</label>
+              {{form.final_date}}
+            </div>
+          </div>
+          <br />
+
+          <div class="row">
+            <div class="col-md">
+              <label>Status:</label>
+              {{form.status}}
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md">
+              <label>Company:</label>
+              {{form.company}}
+            </div>
+          </div>
+          <br />
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Fechar
+          </button>
+          <button type="submit" class="btn btn-primary">Salvar mudanças</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
