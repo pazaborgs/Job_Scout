@@ -1,3 +1,8 @@
+.filtrocontainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .wrapper {
   margin-top: 3%;
   display: flex;
@@ -8,8 +13,9 @@
 
 .box {
   width: 80vw;
-  background: #fff;
+  background: red;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  min-height: 60vh;
 }
 
 .titulo {
@@ -50,29 +56,12 @@
   padding: 30px;
 }
 
-.btn-orange {
-  background-color: #ed8554;
-  color: white;
-}
-
-.tabela {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.tabela-linha {
-  background-color: #ede6e6;
-}
-
-.btn-excluir {
-  text-decoration: none;
-  color: white;
-  background-color: #7d2948;
-  border-radius: 10px;
-  font-weight: bold;
-}
-
 img {
-  width: 15 px;
+  width: 30px;
   height: 15px;
+}
+
+a {
+  display: flex;
+  align-items: center;
 }

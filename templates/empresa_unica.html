@@ -4,67 +4,94 @@
 
 {% endblock%} {% block 'body' %}
 
-<div class="container">
+<div class="container p-5">
   {% include 'messages.html' %}
 
   <div class="row">
-    <div class="col-md">
-      <img width="100%" src="{{company.logo.url}}" />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md">
-      <h1 class="titulo">{{company.name}}</h1>
-      <p class="paragrafo">{{company.headquarters}}</p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md">
-      <label>Nicho de mercado:</label>
-      <input
-        disabled
-        type="text"
-        class="form-control"
-        value="{{company.get_marketing_niche_display}}"
+    <div class="col-md d-flex align-items-center mb-4">
+      <img
+        src="{{company.logo.url}}"
+        class="img-fluid rounded border border-info"
       />
     </div>
-  </div>
 
-  <br />
+    <div class="col-md d-flex flex-column justify-content-start mb-4">
+      <div class="row mb-4">
+        <div class="col-md">
+          <h1 class="title">{{company.name}}</h1>
+          <h3 class="headquarters">{{company.headquarters}}</h3>
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col-md">
-      <label>Tecnologias usadas:</label>
-      <select class="form-select">
-        {% for tech in company.technologies.all %}
-        <option>{{tech}}</option>
-        {% endfor %}
-      </select>
+      <div class="row mb-4">
+        <div class="col-md">
+          <label>Nicho de mercado:</label>
+          <input
+            disabled
+            type="text"
+            class="form-control"
+            value="{{company.get_marketing_niche_display}}"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-md">
+          <label>Tecnologias:</label>
+        </div>
+
+        <div class="col-md">
+          <select class="form-select">
+            {% for tech in company.technologies.all %}
+            <option>{{tech}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-md">
+          <label>Especializações:</label>
+        </div>
+
+        <div class="col-md">
+          <select class="form-select">
+            {% for spec in company.specializations.all %}
+            <option>{{spec}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-4 d-flex justify-content-end">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#modalExemplo"
+        >
+          Nova Vaga
+        </button>
+      </div>
     </div>
-
-    <div class="col-md">
-      <label>Especializações:</label>
-      <select class="form-select">
-        {% for spec in company.specializations.all %}
-        <option>{{spec}}</option>
-        {% endfor %}
-      </select>
-    </div>
   </div>
-
-  <button
-    type="button"
-    class="btn btn-primary"
-    data-toggle="modal"
-    data-target="#modalExemplo"
-  >
-    Nova Vaga
-  </button>
 </div>
 
 {% include 'modal.html' %} {% for job in jobs %}
+
+<div class="col-md">
+  <div class="jobcontainer">
+    <div class="jobcontainer__header">{{job.title}}</div>
+    <div class="jobcontainer__body">
+      <div class="row">
+        <div class="col-md">
+          <label class="jobcontainer__body__exp"> Nível: </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="col-md">
   <div class="box-vagas">
     <div class="header-vagas">{{job.title}}</div>
@@ -83,7 +110,6 @@
           <label class="paragrafo"
             >Status <img src="{% static 'empresa/img/flag_green.png' %}"
           /></label>
-          <br />
           <label class="paragrafo paragrafo-orange"
             >{{job.get_status_display}}</label
           >

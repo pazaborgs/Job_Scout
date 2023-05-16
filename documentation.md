@@ -207,7 +207,9 @@ Com a barra de navegação e o cabeçalho feitos, podemos iniciar a criação do
 
     ```
 
-Na primeira linha, estendemos o html configurado em base.html, ou seja, teremos um html igual ao da base e podemos adicionar conteúdo nos blocos de componente Django do tipo body que definimos no html da base. Também iremos adicionar conteúdo bloco de construção 'head' para separar o css de cada nova página que criarmos,
+Na primeira linha, estendemos o html configurado em base.html, ou seja, teremos um html igual ao da base e podemos adicionar conteúdo nos blocos de componente Django do tipo body que definimos no html da base. Também iremos adicionar conteúdo bloco de construção 'head' para separar o css de cada nova página que criarmos.
+
+## Banco de Dados
 
 Note que no html do app empresas temos vários inputs com informações que caracterizam a empresa a ser cadastrada. Usaremos esses dados em conjunto com o Django para modelar um banco de dados eficiente e que atenda as necessidades da nossa aplicação. O framework Django é capaz de abstrair a modelagem do banco de dados. Na prática, isso quer dizer que não usaremos comandos SQL, mas sim modelamos relações e atributos declarando classes:
 
@@ -259,6 +261,40 @@ Em Django, declaramos as relações em um banco de dados como classes. No exempl
 - Declaramos as colunas definindo seu nome e o tipo de dado que a coluna terá;
 - No campo tecnologias, declaramos um campo de relação M para N como ManytoManyField e indicamos a relação na qual será responsável por fazer esse pareamento. Com Django é fácil modelar campos de dados multivalorados;
 - Também é possível declarar facilmente campos de escolha (Choices). Para isso, criamos uma variável responsável por manter as possíveis escolhas do usuário e a referenciamos utilizando a sintaxe choices=variável. No código, nossas variáveis choice são choices_niche e choices_size.
+
+Criamos o banco de dados em models.py, com a seguinte modelagem:
+
+- Uma relação Tecnologias (Technologies), responsável para ser usada para parear o id de uma tecnologias com o id de uma empresa/vaga em uma outra relação de cardinalidade Muito para Muitos.
+- Uma relação de Especialização (Specialization), para parear o id de uma especialização com uma empresa, através de uma relação Muitos para Muitos
+- Uma relação Empresa (Company), com os seguintes atributos: logo, nome, email, sede, tecnologias, nicho de mercado e especializações
+- Uma relação Vagas (Jobs), com os seguintes atributos: empresa (Chave estrangeira de empresa, relação 1-N), título, experiencia, data final, horas trabalhadas (position_type), status, tecnologias dominadas e tecnologias para estudar. Tecnologias dominadas/para estudar usam a relação Tecnologias.
+
+Após isso, cadastramos essas mudanças no banco de dados usando:
+
+    python manage.py makemigrations
+    python manage.py migrate
+
+Temos que ir no arquivo admin.py, dentro da pasta do aplicativo empresas para cadastrar nossas relações:
+
+    from django.contrib import admin
+
+    from .models import Company, Jobs, Specializations, Technologies
+
+    admin.site.register(Technologies)
+    admin.site.register(Specializations)
+    admin.site.register(Company)
+    admin.site.register(Jobs)
+
+Para os campos com relação M-N aparecerem no html, teremos que renderiza-los através das views do aplicativo empresas.
+
+    from django.http import HttpResponse
+    from django.shortcuts import render
+    from .models import Specializations, Technologies
+
+    def index(request):
+        techs = Technologies.objects.all()
+        specs = Specializations.objects.all()
+        return render(request, "empresas.html", {'techs': techs}, {'specs': specs})
 
 ## Configurando os Formulários
 

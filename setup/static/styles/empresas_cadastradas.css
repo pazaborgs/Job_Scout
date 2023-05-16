@@ -1,0 +1,74 @@
+td {
+  display: flex;
+  align-items: center;
+}
+
+.alinhar {
+  width: 100%;
+}
+
+.btn__filtro {
+  width: 100%;
+}
+
+.btn__excluir {
+  background-color: crimson;
+  border-radius: 50%;
+  border: none;
+}
+
+.form-control {
+  overflow-wrap: break-word;
+}
+
+.wrapper {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.whitebox {
+  width: 80vw;
+  background: #fff;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  min-height: 60vh;
+}
+
+.whitebox__ncompanybtn {
+  background-color: var(--secuncolor);
+  border: 2px solid var(--darker);
+  border-radius: 30px;
+  box-shadow: var(--darker) 4px 4px 0 0;
+  color: var(--light);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.whitebox_ncompanybtn:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.btn-excluir:hover {
+  color: white;
+  text-decoration: none;
+  background-color: #631f38;
+}
+
+.btn-excluir {
+  text-decoration: none;
+  color: white;
+  background-color: #7d2948;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+img {
+  width: 20px;
+  height: auto;
+}

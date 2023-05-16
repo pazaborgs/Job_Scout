@@ -44,6 +44,12 @@ class Company(models.Model):
         return self.name
 
 class Jobs(models.Model):
+
+    def progress(self):
+        x = [((i+1)*20,j[0]) for i, j in enumerate(self.choices_status)]
+        x = list(filter(lambda x: x[1] == self.status, x))[0][0]
+        return x
+
     choices_experience = (
         ('J', 'Júnior'),
         ('P', 'Pleno'),
@@ -58,7 +64,7 @@ class Jobs(models.Model):
         ('F', 'Finalizado')
     )
     
-    company = models.ForeignKey(Company, on_delete=models.DO_NOTHING)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
     experience = models.CharField(max_length=2, choices=choices_experience)
     final_date = models.DateField()

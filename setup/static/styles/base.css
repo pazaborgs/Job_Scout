@@ -1,0 +1,54 @@
+:root {
+  --light: #faf0e6;
+  --secuncolor: #002c58;
+  --maincolor: #005dba;
+  --darker: #1e3d58;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background: var(--light);
+}
+
+.footer {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 12%;
+  gap: 8px;
+}
+
+.footer--light {
+  background-color: var(--secuncolor);
+  color: white;
+}
+
+.footer__socials ul {
+  display: flex;
+  list-style: none;
+  font-size: 1.8rem;
+  gap: 24px;
+}
+
+.footer__socials a {
+  text-decoration: none;
+}
+
+.footer__socials a:hover {
+  color: red;
+  transition: all 0.5s ease;
+}
+
+.footer__piinfo {
+  font-size: 12px;
+  text-align: center;
+}
+
+.footer__credits {
+  font-size: 10px;
+  text-align: center;
+}

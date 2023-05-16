@@ -50,7 +50,7 @@ def empresa_unica(request, id):
     
 
 def excluir_empresa(request, id):
-    company = Company.objects.get(id = id)
+    company = Company.objects.get(id=id)
     company.delete()
     messages.add_message(request, constants.SUCCESS, 'Empresa excluída com sucesso')
     return redirect('/home/empresas_cadastradas')

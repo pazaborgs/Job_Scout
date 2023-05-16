@@ -9,9 +9,6 @@
 .box {
   padding: 32px;
   width: 50vw;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  border: 1px solid black;
-  border-radius: 12px;
 }
 
 .header {
@@ -24,8 +21,6 @@
 
 .row {
   padding: 12px;
-  border: solid black 1px;
-  border-radius: 12px;
 }
 
 .col-md {
@@ -33,6 +28,8 @@
   justify-content: center;
   align-items: center;
   margin: 6px;
+  border: 2px solid black;
+  border-radius: 20px;
 }
 
 .col-md select {
