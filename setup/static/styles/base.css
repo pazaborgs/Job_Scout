@@ -2,7 +2,11 @@
   --light: #faf0e6;
   --secuncolor: #002c58;
   --maincolor: #005dba;
-  --darker: #1e3d58;
+  --darker: #28282b;
+  --red: #ff4433;
+  --yellow: #fada5e;
+  --green: #0bda51;
+  --lightb: #add8e6;
 }
 
 body {
@@ -10,7 +14,14 @@ body {
   background: var(--light);
 }
 
+.navbar-brand img {
+  width: 50px;
+  height: auto;
+  padding: 4px;
+}
+
 .footer {
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -28,27 +39,28 @@ body {
 }
 
 .footer__socials ul {
-  display: flex;
   list-style: none;
   font-size: 1.8rem;
   gap: 24px;
 }
 
 .footer__socials a {
+  font-size: 1.8rem;
   text-decoration: none;
 }
 
 .footer__socials a:hover {
-  color: red;
+  color: var(--light);
   transition: all 0.5s ease;
 }
 
-.footer__piinfo {
-  font-size: 12px;
-  text-align: center;
+.footer__text {
+  font-size: 10px;
+  color: var(--lightb);
 }
 
-.footer__credits {
-  font-size: 10px;
-  text-align: center;
+@media (max-width: 720px) {
+  .footer__text {
+    display: none;
+  }
 }

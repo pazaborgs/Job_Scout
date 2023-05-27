@@ -4,12 +4,18 @@ from empresas.models import Company, Jobs, Specializations, Technologies
 
 
 class CadastroEmpresa(forms.ModelForm):
-    
-    name = forms.CharField(label = '', widget=forms.TextInput(attrs = {'placeholder': 'Nome da Empresa'}))
 
     class Meta:
         model = Company
         fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'email': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'headquarters': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+            'company_size': forms.Select(attrs={'class': 'form-control mb-3'}),
+            'marketing_niche': forms.Select(attrs={'class': 'form-control mb-3'}),
+            'logo': forms.FileInput(attrs={'class': 'form-control mb-3l'}),
+        }
 
     technologies = forms.ModelMultipleChoiceField(
         queryset= Technologies.objects.all(),
@@ -36,4 +42,11 @@ class CadastroVaga(forms.ModelForm):
         model = Jobs
         fields = '__all__'
 
-    title = forms.CharField(label = '', widget=forms.TextInput(attrs = {'placeholder': 'Título da Vaga'}))
+        widgets = {
+                'title': forms.TextInput(attrs={'class': 'form-control mb-3'}),
+                'experience': forms.Select(attrs={'class': 'form-control mb-3'}),
+                'url': forms.URLInput(attrs={'class': 'form-control mb-3'}),
+                'final_date': forms.DateInput(attrs={'class': 'form-control mb-3'}),
+                'position_type': forms.NumberInput(attrs={'class': 'form-control mb-3'}),
+                'statues': forms.Select(attrs={'class': 'form-control mb-3l'}),
+            }

@@ -1,0 +1,77 @@
+.title {
+  color: var(--maincolor);
+  font-weight: bold;
+  font-size: 48px;
+}
+
+.title__company {
+  font-weight: bold;
+  font-size: 36px;
+  color: var(--darker);
+}
+
+.title__status {
+  font-size: 24px;
+  color: var(--darker);
+}
+
+.bg2 {
+  background-color: #ede6e6;
+  margin-top: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.taskinput {
+  width: 70%;
+}
+
+.li-tasks-notfinished {
+  background-color: var(--secuncolor);
+  padding: 8px;
+  color: white;
+  border-radius: 16px;
+}
+
+.li-tasks-finished {
+  background-color: red;
+  padding: 8px;
+  color: white;
+  border-radius: 16px;
+}
+
+.priority-block {
+  margin-left: 20px;
+}
+
+.red-priority {
+  color: var(--red);
+}
+
+.yellow-priority {
+  color: var(--yellow);
+}
+
+.green-priority {
+  color: var(--green);
+}
+
+.bg3 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.newtaskbtn {
+  background-color: var(--maincolor);
+  font-weight: 400;
+}
+
+@media (max-width: 720px) {
+  .taskinput {
+    width: 100%;
+  }
+}
+
+.finishedbtn {
+  display: inline;
+}

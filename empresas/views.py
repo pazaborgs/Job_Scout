@@ -16,6 +16,7 @@ def nova_empresa(request):
     elif request.method == 'POST':
 
         form = CadastroEmpresa(request.POST, request.FILES)
+        print('FUCK')
     
         if form.is_valid():
             form.save()

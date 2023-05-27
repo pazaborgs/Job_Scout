@@ -8,45 +8,35 @@
 {% block 'body' %}
 
     <section class="wrapper">
-        <div class="box">
-
+        <div class="whitebox">
             <div class="header">
                 {% include 'messages.html' %}
                 <h3 class="title">Nova empresa</h3>
             </div>
 
             <div class="body-box">
-                <form action= "{% url 'nova_empresa' %}" method="post" enctype="multipart/form-data" > 
+                <div class="form-group">
+                <form action= "{% url 'nova_empresa' %}" method="POST" enctype=multipart/form-data> 
                     {% csrf_token %}
 
                     <div class="row">
-                        <div class="col-md">
-                            <label>Nome:</label>
+                            <label for="exampleInputEmail1" class="form-label">Nome</label>
                             {{form.name}}
-                        </div>
-
-                        <div class="col-md">
-                            <label>E-mail:</label>
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
                             {{form.email}}
-                        </div>
-
-                        <div class="col-md">
-                            <label>Sede:</label>
+                            <label for="exampleInputEmail1" class="form-label">Sede</label>
                             {{form.headquarters}}
-                        </div>
                     </div>
-                    <br>
+
 
                     <div class ="row">   
                         <div class="col-md">
-                            <label>Tamanho da Empresa:</label>
+                            <label for="exampleInputEmail1" class="form-label">Tamanho da Empresa</label>
                             {{form.company_size}}
-                            
-                            
                             </select>
                         </div>
                         <div class="col-md">
-                            <label>Nicho de mercado:</label>
+                            <label for="exampleInputEmail1" class="form-label">Nicho de Mercado</label>
                             {{form.marketing_niche}}
                         </div>
                     </div>
@@ -54,25 +44,24 @@
 
                     <div class="row">
                         <div class="col-md">
-                            <label>Tecnologias:</label>
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
                             {{form.technologies}}
                         </div>
                         <div class="col-md">
-                            <label>Especializações:</label>
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
                             {{form.specializations}}
                         </div>
                     </div>
                     <br>
 
                     <div class="row">
-                        <div class="col-md">
-                            <label>Logo:</label>
-                            {{form.logo}}
-                        </div>
+                        <label for="exampleInputEmail1" class="form-label">Logo da Empresa</label>
+                        {{form.logo}}
                     </div>
                     <br>
                     <input type="submit" value="Nova empresa" class="form__submitbtn">
                 </form>
+                </div>
                 
             </div>
         </div>

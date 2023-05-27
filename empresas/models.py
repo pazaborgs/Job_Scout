@@ -66,12 +66,11 @@ class Jobs(models.Model):
     
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
-    experience = models.CharField(max_length=2, choices=choices_experience)
+    url = models.URLField(max_length=300)
+    experience = models.CharField(max_length=20, choices=choices_experience)
     final_date = models.DateField()
     position_type = models.IntegerField()
     status = models.CharField(max_length=30, choices=choices_status)
-    technologies_mastered = models.ManyToManyField(Technologies)
-    technologies_study = models.ManyToManyField(Technologies, related_name='estudar')
 
 
     def __str__(self):

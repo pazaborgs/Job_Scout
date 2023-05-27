@@ -9,12 +9,12 @@
       <section class="alert {{message.tags}}">{{message}}</section>
       {% endfor %} {% endif %}
 
-      <div class="row pt-5 pb-5 border-bottom border-info">
-        <div class="col-md-7 d-flex justify-content-center mb-4 mb-md-0">
-          <h2 class="text-center m-0">Empresas Cadastradas</h2>
+      <div class="row pt-5 pb-5 border-bottom border-info header_box">
+        <div class="col-md-7 text-center mb-4 mb-md-0">
+          <h1 class="text-center m-0">Empresas Cadastradas</h1>
         </div>
-        <div class="col-md-5 d-flex justify-content-center mb-4 mb-md-0">
-          <a class="btn btn-primary whitebox__ncompanybtn" href="{% url 'nova_empresa' %}" role="button">Nova Empresa</a> 
+        <div class="col-md-5 text-center mb-4 mb-md-0">
+          <a class="btn btn-primary whitebox__newcompanybtn" href="{% url 'nova_empresa' %}" role="button">Nova Empresa</a> 
         </div>
       </div>
     </div>
@@ -40,47 +40,41 @@
               </select>
             </div>
 
-            <div class="col-md d-flex justify-content-end mb-4 mb-md-0">
+            <div class="col-md text-center mb-4 mb-md-0">
               <input
                 type="submit"
                 value="Filtrar"
-                class="btn btn-primary btn__filtro"
+                class="btn btn-primary whitebox__filterbtn"
               />
             </div>
           </div>
         </div>
       </form>
 
-      <div class="table-responsive">
-      <table class="table">
+      <div class="table-responsive col-lg-12">
+
+      <table class="table table-light table-striped table-hover p-5 align-items-center">
         <tbody>
-        {% for company in companies%}
-          <tr class ="d-flex p-2 justify-content-around align-middle">
-            <td>
-              <a href="{% url 'empresa_unica' company.id  %}">
-              {{company.name}}
-              </a>
-            </td>
+        {% for company in companies %}
+          <tr class="text-center m-0 align-middle">
+            <td><a href="{% url 'empresa_unica' company.id  %}"> {{company.name}}</a></td>
             <td>{{company.headquarters}}</td>
-
-            <td>
-              <select class="form-select" aria-label="Default select example" id="inputGroupSelect01">
-                {% for tech in company.technologies.all %}
-                <option>{{tech}}</option>
-                {% endfor %}
-              </select>
+            <td> <select class="form-select" aria-label="Default select example" id="inputGroupSelect01">
+                  {% for tech in company.technologies.all %}
+                  <option>{{tech}}</option>
+                  {% endfor %}
+                </select>
             </td>
-
             <td>
-              {% if Company.qtd_vagas > 0 %}
+              {% if company.qtd_vagas > 0 %}
               <img src="{% static '/assets/flag_green.png' %}" />
               {% else %}
               <img src="{% static '/assets/flag_red.png' %}" />
-              {% endif %} {{Company.qtd_vagas}}
+              {% endif %} 
+              {{company.qtd_vagas}}
             </td>
-
             <td>
-              <a class="btn btn-primary btn__excluir" href="{% url 'excluir_empresa' company.id %}" role="button"><i class="ri-delete-bin-6-line"></i></a> 
+              <a class="btn btn-primary whitebox__deletebtn text-center " href="{% url 'excluir_empresa' company.id %}" role="button"><i class="ri-delete-bin-6-line"></i></a> 
             </td>
           </tr>
           {% endfor %}

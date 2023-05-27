@@ -1,28 +1,10 @@
-.titulo {
-  color: #7d2948;
-  font-weight: bold;
+.jobcontainer {
+  width: 25%;
+  height: 300px;
+  background-color: blueviolet;
 }
 
-.paragrafo {
-  font-size: 25px;
-}
-
-.btn-orange {
-  background-color: #ed8554;
-  color: white;
-}
-
-label {
-  font-weight: bold;
-}
-
-.box-vagas {
-  width: 400px;
-  margin-top: 60px;
-  background-color: #ede6e6;
-}
-
-.header-vagas {
+.jobcontainer__header {
   background-color: #7d2948;
   padding: 15px;
   color: white;
@@ -32,6 +14,28 @@ label {
   padding: 15px;
 }
 
-.paragrafo-orange {
-  color: #ed8554;
+.whitebox {
+  width: 60vw;
+  background: #fff;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  min-height: 60vh;
+}
+
+.companylogo {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+.companylogo img {
+  width: auto;
+  height: 100%;
+  margin-left: -50px;
+}
+
+@media (max-width: 720px) {
+  .whitebox {
+    width: 100%;
+  }
 }
