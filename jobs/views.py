@@ -25,7 +25,8 @@ def vaga_unica(request, id):
     tarefas = Task.objects.filter(job_id = vaga_unica)
     return render(request, 'jobs/vaga.html', {'vaga': vaga_unica, 'tarefas': tarefas})
 
-def nova_tarefa(request, id_vaga):
+ 
+def nova_tarefa(request, id_vaga): # Precisa adicionar validação de
 
     title = request.POST.get('title')
     priority = request.POST.get("priority")
@@ -40,17 +41,18 @@ def nova_tarefa(request, id_vaga):
     return redirect(f'/jobs/vaga_unica/{id_vaga}')
 
 def realizar_tarefa(request, id):
-    tarefas_list = Task.objects.filter(id=id).filter(finished=False)
 
-    if not tarefas_list.exists():
-        messages.add_message(request, constants.ERROR, 'Erro interno do sistema!')
-        return redirect(f'/home/empresas/')
+    task = Task.objects.filter(id=id).filter(finished=False).first()
 
-    tarefa = tarefas_list.first()
-    tarefa.finished = True
-    tarefa.save()    
-    messages.add_message(request, constants.SUCCESS, 'Tarefa realizada com sucesso, parabéns!')
-    return redirect(f'/jobs/vaga_unica/{tarefa.job.id}')
+    if not task:
+
+        messages.add_message(request, constants.ERROR, 'Erro interno do sistema ou tarefa não encontrada!')
+        return redirect('/home/empresas/')
+
+    else:
+        task.delete()
+        messages.add_message(request, constants.SUCCESS, 'Tarefa deletada com sucesso!')
+        return redirect(f'/jobs/vaga_unica/{task.job.id}')
 
 
 

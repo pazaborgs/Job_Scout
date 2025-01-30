@@ -28,13 +28,20 @@ class CadastroEmpresa(forms.ModelForm):
     )
 
     def clean_logo(self):
-        data =  self.cleaned_data.get('logo')
-        filesize= data.size
-    
-        if filesize > 100_000_000:
-            raise forms.ValidationError("You cannot upload file more than 10Mb")
+        data = self.cleaned_data.get('logo')
+        default_logo_path = 'static/assets/helmet_bro.jpg'
+
+        if data is None:
+            return default_logo_path
+        
         else:
-            return data
+
+            filesize = data.size
+
+            if filesize > 10 * 1024 * 1024:  # 10MB em bytes
+                raise forms.ValidationError("Você não pode enviar um arquivo maior que 10MB")
+            else:
+                return data
 
 class CadastroVaga(forms.ModelForm):
     
