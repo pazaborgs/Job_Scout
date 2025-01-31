@@ -1,18 +1,5 @@
 from django.db import models
 
-
-class Technologies(models.Model):
-    technology = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.technology
-
-class Specializations(models.Model):
-    specialization = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.specialization
-
 class Company(models.Model):
 
     def qtd_vagas(self):
@@ -25,20 +12,18 @@ class Company(models.Model):
         ('Grande', 'Acima de 500 colaboradores')
     )
     choices_niche = (
-        ('M', 'Marketing'),
-        ('T', 'Tecnologia'),
-        ('N', 'Nutrição'),
-        ('D', 'Design')
+        ('Marketing', 'Marketing'),
+        ('Tecnologia', 'Tecnologia'),
+        ('Nutrição', 'Nutrição'),
+        ('Design', 'Design')
     )
 
     name = models.CharField(max_length=50)
     email = models.EmailField()
     headquarters = models.CharField(max_length=30)
     company_size = models.CharField(max_length=30, choices= choices_size)
-    marketing_niche = models.CharField(max_length=3, choices=choices_niche)
-    technologies = models.ManyToManyField(Technologies)
-    specializations = models.ManyToManyField(Specializations)
-    logo = models.ImageField(upload_to='company_logo')
+    marketing_niche = models.CharField(max_length= 30, choices=choices_niche)
+    logo = models.ImageField(upload_to='company_logo', blank=True, null=True)
 
     def __str__(self) -> str:
         return self.name

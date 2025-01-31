@@ -1,6 +1,6 @@
 from django import forms
 
-from empresas.models import Company, Jobs, Specializations, Technologies
+from empresas.models import Company, Jobs
 
 
 class CadastroEmpresa(forms.ModelForm):
@@ -14,18 +14,8 @@ class CadastroEmpresa(forms.ModelForm):
             'headquarters': forms.TextInput(attrs={'class': 'form-control mb-3'}),
             'company_size': forms.Select(attrs={'class': 'form-control mb-3'}),
             'marketing_niche': forms.Select(attrs={'class': 'form-control mb-3'}),
-            'logo': forms.FileInput(attrs={'class': 'form-control mb-3l'}),
+            'logo': forms.FileInput(attrs={'class': 'form-control mb-3'}),
         }
-
-    technologies = forms.ModelMultipleChoiceField(
-        queryset= Technologies.objects.all(),
-        widget = forms.CheckboxSelectMultiple
-    )
-
-    specializations = forms.ModelMultipleChoiceField(
-        queryset= Specializations.objects.all(),
-        widget = forms.CheckboxSelectMultiple
-    )
 
     def clean_logo(self):
         data = self.cleaned_data.get('logo')
@@ -55,5 +45,5 @@ class CadastroVaga(forms.ModelForm):
                 'url': forms.URLInput(attrs={'class': 'form-control mb-3'}),
                 'final_date': forms.DateInput(attrs={'class': 'form-control mb-3'}),
                 'position_type': forms.NumberInput(attrs={'class': 'form-control mb-3'}),
-                'statues': forms.Select(attrs={'class': 'form-control mb-3l'}),
+                'status': forms.Select(attrs={'class': 'form-control mb-3l'}),
             }

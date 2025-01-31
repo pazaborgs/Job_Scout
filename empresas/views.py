@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from empresas.forms import CadastroEmpresa, CadastroVaga
 
-from .models import Company, Jobs, Technologies
+from .models import Company, Jobs
 
 
 def nova_empresa(request):
@@ -30,17 +30,18 @@ def nova_empresa(request):
 def empresas_cadastradas(request):
 
     name_filter = request.GET.get('name')
-    techs_filter = request.GET.get('technologies')
+    niche_filter = request.GET.get('marketing_niche')
     companies = Company.objects.all()
 
     if name_filter:
         companies = companies.filter(name__icontains = name_filter)
 
-    if techs_filter:
-        companies = companies.filter(technologies = techs_filter)
+    if niche_filter:
+        companies = companies.filter(marketing_niche = niche_filter)
     
-    techs = Technologies.objects.all()
-    return render(request, 'empresas_cadastradas.html', {'companies': companies, 'techs': techs})
+    niches = Company.objects.values_list('marketing_niche', flat=True).distinct()
+    
+    return render(request, 'empresas_cadastradas.html', {'companies': companies, 'niches': niches})
 
 
 def empresa_unica(request, id):

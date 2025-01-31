@@ -33,11 +33,12 @@
             </div>
 
             <div class="col-md-3 mb-4 mb-md-0">
-              <select class="form-select" aria-label="Default select example" id="inputGroupSelect01" name="technologies">
-                {% for tech in techs%}
-                <option value="{{tech.id}}">{{tech}}</option>
+              <select class="form-select" aria-label="Default select example" id="inputGroupSelect01" name="marketing_niche">
+                {% for niche in niches %}
+                <option value="{{niche}}">{{niche}}</option>
                 {% endfor %}
               </select>
+                {{niche.1}}
             </div>
 
             <div class="col-md text-center mb-4 mb-md-0">
@@ -59,17 +60,14 @@
           <tr class="text-center m-0 align-middle">
             <td><a href="{% url 'empresa_unica' company.id  %}"> {{company.name}}</a></td>
             <td>{{company.headquarters}}</td>
-            <td> <select class="form-select" aria-label="Default select example" id="inputGroupSelect01">
-                  {% for tech in company.technologies.all %}
-                  <option>{{tech}}</option>
-                  {% endfor %}
-                </select>
-            </td>
             <td>
+              {{company.marketing_niche}}
+            </td>
+            <td class ="num-jobs">
               {% if company.qtd_vagas > 0 %}
-              <img src="{% static '/assets/flag_green.png' %}" />
+              <img src="{% static '/assets/accept.png' %}" />
               {% else %}
-              <img src="{% static '/assets/flag_red.png' %}" />
+              <img src="{% static '/assets/cancel.png' %}" />
               {% endif %} 
               {{company.qtd_vagas}}
             </td>

@@ -21,36 +21,7 @@
 
       <div class="row mb-4">
           <label>Nicho de mercado:</label>
-          <input
-            disabled
-            type="text"
-            class="form-control"
-            value="{{company.get_marketing_niche_display}}"
-          />
-      </div>
-
-      <div class="row mb-4">
-          <label>Tecnologias:</label>
-
-          <select class="form-select">
-            {% for tech in company.technologies.all %}
-            <option>{{tech}}</option>
-            {% endfor %}
-          </select>
-      </div>
-
-      <div class="row mb-4">
-     
-          <label>Especializações:</label>
-
-
-     
-          <select class="form-select">
-            {% for spec in company.specializations.all %}
-            <option>{{spec}}</option>
-            {% endfor %}
-          </select>
-   
+          <h3 class = 'niche_label'>{{company.marketing_niche}} </h3>
       </div>
 
       <div class="row mb-4 d-flex justify-content-center">

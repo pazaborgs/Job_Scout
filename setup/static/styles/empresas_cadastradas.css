@@ -10,7 +10,7 @@
   width: 80vw;
   background: #fff;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-  min-height: 60vh;
+  min-height: 50%;
 }
 
 .whitebox__newcompanybtn {
@@ -50,13 +50,17 @@
   background-color: var(--darker);
 }
 
-img {
-  width: 20px;
-  height: auto;
-}
+
 
 @media (max-width: 720px) {
   .whitebox {
     width: 100%;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 450px) {
+  tr.td.num-jobs {
+    display: none;
   }
 }

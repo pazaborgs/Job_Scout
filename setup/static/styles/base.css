@@ -20,18 +20,11 @@ body {
   padding: 4px;
 }
 
-.footer {
-  position: relative;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 28px 12%;
-  gap: 8px;
+.footer_container {
+  background-color: var(--secuncolor);
+  color: white;
 }
+
 
 .footer--light {
   background-color: var(--secuncolor);
@@ -60,7 +53,7 @@ body {
 }
 
 @media (max-width: 720px) {
-  .footer__text {
+  a.text-body-secondary {
     display: none;
   }
 }

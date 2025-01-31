@@ -33,7 +33,7 @@
     <title>Job Scout</title>
   </head>
 
-  <body>
+  <body class = "d-flex flex-column min-vh-100">
     <nav
       class="navbar navbar-expand-lg navbar-light ml-auto"
       style="background-color: var(--maincolor)"
@@ -47,7 +47,19 @@
 
     {% block 'body' %} {% endblock%}
 
-    <footer class="footer footer--light">
+
+  <footer class="py-3 mt-auto"; style= "background-color: var(--maincolor); color: white">  
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">exemplo</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">exemplo</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">exemplo</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">exemplo</a></li>
+    </ul>
+    <p class="text-center text-body-secondary">© 2025, Projeto Integrador III</p>
+  </footer>
+  
+
+   <!---
       <div class="content">
         <div class="row footer__socials">
           <ul class="d-flex flex-row justify-content-center align-itens-center">
@@ -76,17 +88,11 @@
       </div>
     </footer>
 
-    <!-- 
+    --> 
        
-      <div class="footer__piinfo">
-        <p>Projeto Integrador em Computação I — Eixo Computação 2021</p>
-      </div>
-      <div class="footer__credits">
-        <p>Patrick Regis | Renato Aguetoni</p>
-      </div>
+      
     
 
-  -->
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

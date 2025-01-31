@@ -7,7 +7,7 @@
 
 {% block 'body' %}
 
-    <section class="wrapper">
+    <section class="wrapper d-flex flex-column min-vh-100">
         <div class="whitebox">
             <div class="header">
                 {% include 'messages.html' %}
@@ -31,31 +31,19 @@
 
                     <div class ="row">   
                         <div class="col-md">
-                            <label for="exampleInputEmail1" class="form-label">Tamanho da Empresa</label>
+                            <label class="form-label">Tamanho da Empresa</label>
                             {{form.company_size}}
                             </select>
                         </div>
                         <div class="col-md">
-                            <label for="exampleInputEmail1" class="form-label">Nicho de Mercado</label>
+                            <label class="form-label">Nicho de Mercado</label>
                             {{form.marketing_niche}}
                         </div>
                     </div>
                     <br>
 
                     <div class="row">
-                        <div class="col-md">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            {{form.technologies}}
-                        </div>
-                        <div class="col-md">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            {{form.specializations}}
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <label for="exampleInputEmail1" class="form-label">Logo da Empresa</label>
+                        <label class="form-label">Logo da Empresa</label>
                         {{form.logo}}
                     </div>
                     <br>
