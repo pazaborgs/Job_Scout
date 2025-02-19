@@ -1,12 +1,12 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.messages import constants
 from django.shortcuts import get_object_or_404, redirect, render
-
 from empresas.forms import CadastroEmpresa, CadastroVaga
-
 from .models import Company, Jobs
+from django.contrib.auth.models import User
 
-
+@login_required
 def nova_empresa(request):
 
     if request.method ==  'GET':
@@ -16,22 +16,26 @@ def nova_empresa(request):
     elif request.method == 'POST':
 
         form = CadastroEmpresa(request.POST, request.FILES)
-        print('FUCK')
-    
+        print(request.user)
         if form.is_valid():
-            form.save()
+            company = form.save(commit=False)
+            company.owner = request.user
+            company.save()
             messages.add_message(request, constants.SUCCESS, 'Empresa cadastrada com sucesso')
             return redirect('/home/nova_empresa')
        
         else:
+            print(form.errors)
             messages.add_message(request, constants.ERROR, 'Empresa não cadastrada')
             return render(request, 'nova_empresa.html', {'form': form})
 
 def empresas_cadastradas(request):
 
+    user = request.user
+
     name_filter = request.GET.get('name')
     niche_filter = request.GET.get('marketing_niche')
-    companies = Company.objects.all()
+    companies = Company.objects.filter(owner=user)
 
     if name_filter:
         companies = companies.filter(name__icontains = name_filter)

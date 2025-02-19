@@ -13,7 +13,8 @@
                 {% include 'messages.html' %}
                 <h3 class="title">Nova empresa</h3>
             </div>
-
+            {{user.get_username}}
+            {{user.get_id}}
             <div class="body-box">
                 <div class="form-group">
                 <form action= "{% url 'nova_empresa' %}" method="POST" enctype=multipart/form-data> 

@@ -1,13 +1,10 @@
 from django import forms
-
 from empresas.models import Company, Jobs
 
-
 class CadastroEmpresa(forms.ModelForm):
-
     class Meta:
         model = Company
-        fields = '__all__'
+        exclude = ["owner"]
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control mb-3'}),
             'email': forms.TextInput(attrs={'class': 'form-control mb-3'}),
@@ -24,14 +21,10 @@ class CadastroEmpresa(forms.ModelForm):
         if data is None:
             return default_logo_path
         
-        else:
-
-            filesize = data.size
-
-            if filesize > 10 * 1024 * 1024:  # 10MB em bytes
-                raise forms.ValidationError("Você não pode enviar um arquivo maior que 10MB")
-            else:
-                return data
+        filesize = data.size
+        if filesize > 10 * 1024 * 1024:  # 10MB in bytes
+            raise forms.ValidationError("Você não pode enviar um arquivo maior que 10MB")
+        return data
 
 class CadastroVaga(forms.ModelForm):
     

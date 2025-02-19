@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Company(models.Model):
 
@@ -18,6 +19,7 @@ class Company(models.Model):
         ('Design', 'Design')
     )
 
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     email = models.EmailField()
     headquarters = models.CharField(max_length=30)
